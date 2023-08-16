@@ -4,6 +4,8 @@ version: "0.0.5"
 readme: "README.md"
 authors:
     - "Gustav Larsson"
+license:
+    - "GPL-3.0-or-later"
 dependencies:
     "fortinet.fortios": ">=2.2.3"
 repository: "https://github.com/Wessrow/fortios_handler-collection"

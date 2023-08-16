@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 """
 Custom Ansible module - returns list of keys for a specific endpoint.
 """
@@ -5,6 +7,48 @@ Custom Ansible module - returns list of keys for a specific endpoint.
 import urllib3
 from fortiosapi import FortiOSAPI
 from ansible.module_utils.basic import AnsibleModule
+
+DOCUMENTATION = """
+---
+module: fortios_fw_state
+short_description: GETs current state of FW.
+description:
+    - Lorum Ipsum
+version_added: "0.0.5"
+author:
+    - Gustav Larsson
+notes:
+    - Lorum Ipsum
+
+requirements:
+    - ansible>=2.9
+options:
+    host:
+        description:
+            - Host to GET state from.
+        type: str
+        required: true
+    token:
+        description:
+            - API token for device.
+        type: str
+        required: true
+    differ_api_path:
+        description:
+            - API path to GET state from.
+        type: str
+        required: true
+    differ_api_name:
+        description:
+            - API endpoint to GET state from.
+        type: str
+        required: true
+    ssl_verify:
+        description:
+            - Switch whether to check SSL-cert or not.
+        type: str
+        required: true
+"""
 
 module = AnsibleModule(argument_spec={
     "host":{"type":"str", "required":True},                     # hostname
