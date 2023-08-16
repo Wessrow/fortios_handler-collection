@@ -6,4 +6,4 @@ authors:
     - "Gustav Larsson"
 dependencies:
     "fortinet.fortios": ">=2.2.3"
-# repository: "https://www.github.com/my_org/my_collection"
+repository: "https://github.com/Wessrow/fortios_handler-collection"
