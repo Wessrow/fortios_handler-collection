@@ -1,0 +1,11 @@
+---
+- name: Delete service group
+  fortinet.fortios.fortios_firewall_service_group:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_service_group:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(group.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

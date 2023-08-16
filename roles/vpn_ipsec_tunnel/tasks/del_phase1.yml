@@ -1,0 +1,11 @@
+---
+- name: Delete ipsec vpn - phase1
+  fortinet.fortios.fortios_vpn_ipsec_phase1_interface:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    vpn_ipsec_phase1_interface:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(phase1_interface.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

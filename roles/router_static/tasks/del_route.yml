@@ -1,0 +1,11 @@
+---
+- name: Delete static route
+  fortinet.fortios.fortios_router_static:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    router_static:
+      seq_num: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(static.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

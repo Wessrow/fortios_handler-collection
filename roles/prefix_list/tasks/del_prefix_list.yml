@@ -1,0 +1,11 @@
+---
+- name: Delete prefix list
+  fortinet.fortios.fortios_router_prefix_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    router_prefix_list:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(prefix_list.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

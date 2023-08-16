@@ -1,0 +1,6 @@
+---
+- name: Change system global settings
+  fortinet.fortios.fortios_system_global:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    system_global: "{{ global }}"

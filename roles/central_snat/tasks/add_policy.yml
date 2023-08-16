@@ -1,0 +1,23 @@
+---
+- name: Add central snat policies
+  fortinet.fortios.fortios_firewall_central_snat_map:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    firewall_central_snat_map:
+      status: "{{ item.value.status }}"
+      policyid: "{{ item.key }}"
+      nat: "{{ item.value.nat }}"
+      type: "{{ item.value.type }}"
+      srcintf: "{{ item.value.srcintf }}"
+      dstintf: "{{ item.value.dstintf }}"
+      orig_addr: "{{ item.value.orig_addr }}"
+      dst_addr: "{{ item.value.dst_addr }}"
+      protocol: "{{ item.value.protocol }}"
+      orig_port: "{{ item.value.orig_port }}"
+      nat_ippool: "{{ item.value.nat_ippool | default(omit) }}"
+      nat_port: "{{ item.value.nat_port }}"
+      comments: "{{ item.value.comments }}"
+  loop: "{{ lookup('dict', central_snat_map, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

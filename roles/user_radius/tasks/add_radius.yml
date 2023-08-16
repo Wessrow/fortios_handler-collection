@@ -1,0 +1,15 @@
+---
+- name: Add radius user
+  fortinet.fortios.fortios_user_radius:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    user_radius:
+      name: "{{ item.key }}"
+      server: "{{ item.value.server }}"
+      secret: "{{ item.value.secret }}"
+      secondary_server: "{{ item.value.secondary_server }}"
+      secondary_secret: "{{ item.value.secondary_secret }}"
+  loop: "{{ lookup('dict', radius, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

@@ -1,0 +1,7 @@
+---
+- name: Change sdwan service (rules)
+  fortinet.fortios.fortios_system_sdwan:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    system_sdwan:
+      service: "{{ service }}"

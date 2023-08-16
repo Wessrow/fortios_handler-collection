@@ -1,0 +1,12 @@
+---
+- name: Add prefix list
+  fortinet.fortios.fortios_router_prefix_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    router_prefix_list:
+      name: "{{ item.key }}"
+      rule: "{{ item.value.rule }}"
+  loop: "{{ lookup('dict', prefix_list, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

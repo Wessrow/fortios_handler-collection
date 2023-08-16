@@ -1,0 +1,7 @@
+---
+- name: Return list of switches
+  ansible.builtin.find:
+    paths: host_vars/{{ inventory_hostname }}/managed_switches
+  register: switches
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_sw.yml

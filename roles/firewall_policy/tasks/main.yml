@@ -1,0 +1,13 @@
+---
+- name: Differ for /firewall/policy/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "firewall"
+    differ_api_name: "policy"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_policy.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_policy.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: sort_policy.yml

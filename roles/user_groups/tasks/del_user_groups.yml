@@ -1,0 +1,11 @@
+---
+- name: Delete user groups
+  fortinet.fortios.fortios_user_group:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    user_group:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(usergrp.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

@@ -1,0 +1,6 @@
+---
+- name: Change bgp settings
+  fortinet.fortios.fortios_router_bgp:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    router_bgp: "{{ bgp }}"

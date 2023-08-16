@@ -1,0 +1,30 @@
+---
+- name: Add ipsec vpn - phase1
+  fortinet.fortios.fortios_vpn_ipsec_phase1_interface:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    vpn_ipsec_phase1_interface:
+      authmethod: "{{ item.value.authmethod }}"
+      ike_version: "{{ item.value.ike_version }}"
+      comments: "{{ item.value.comments }}"
+      dhgrp: "{{ item.value.dhgrp }}"
+      dpd: "{{ item.value.dpd }}"              ##### only one choice supported
+      dpd_retrycount: "{{ item.value.dpd_retrycount }}"
+      dpd_retryinterval: "{{ item.value.dpd_retryinterval }}"
+      interface: "{{ item.value.interface }}"
+      keepalive: "{{ item.value.keepalive }}"
+      keylife: "{{ item.value.keylife }}"
+      local_gw: "{{ item.value.local_gw | default(omit) }}"
+      name: "{{ item.key }}"
+      nattraversal: "{{ item.value.nattraversal }}"
+      net_device: "{{ item.value.net_device }}"
+      peertype: "{{ item.value.peertype }}"
+      proposal: "{{ item.value.proposal }}"
+      psksecret: "{{ item.value.psksecret }}"
+      type: "{{ item.value.type }}"
+      remote_gw: "{{ item.value.remote_gw | default(omit) }}"
+  no_log: false
+  loop: "{{ lookup('dict', phase1_interface, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

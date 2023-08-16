@@ -1,0 +1,11 @@
+---
+- name: Delete aspath list
+  fortinet.fortios.fortios_router_aspath_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    router_aspath_list:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(aspath_list.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

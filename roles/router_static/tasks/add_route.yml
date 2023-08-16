@@ -1,0 +1,19 @@
+---
+- name: Add static route
+  fortinet.fortios.fortios_router_static:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    router_static:
+      comment: "{{ item.value.comment }}"
+      device: "{{ item.value.device }}"
+      sdwan_zone: "{{ item.value.sdwan_zone | default(omit) }}"
+      blackhole: "{{ item.value.blackhole | default(omit) }}"
+      distance: "{{ item.value.distance }}"
+      dst: "{{ item.value.dst }}"
+      status: "{{ item.value.status }}"
+      gateway: "{{ item.value.gateway }}"
+      seq_num: "{{ item.key }}"
+  loop: "{{ lookup('dict', static, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

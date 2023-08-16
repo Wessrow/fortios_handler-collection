@@ -1,0 +1,12 @@
+---
+- name: Add route map
+  fortinet.fortios.fortios_router_route_map:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    router_route_map:
+      name: "{{ item.key }}"
+      rule: "{{ item.value.rule }}"
+  loop: "{{ lookup('dict', route_map, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

@@ -1,0 +1,11 @@
+---
+- name: Delete address object
+  fortinet.fortios.fortios_firewall_address:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_address:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(address.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

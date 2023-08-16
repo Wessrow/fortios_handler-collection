@@ -1,0 +1,13 @@
+---
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_zone.yml
+  when: zone is defined
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_member.yml
+  when: members is defined
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_health_check.yml
+  when: health_checks is defined
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_service.yml
+  when: service is defined

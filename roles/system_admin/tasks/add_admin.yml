@@ -1,0 +1,17 @@
+---
+- name: Add Admin
+  fortinet.fortios.fortios_system_admin:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    system_admin:
+      name: "{{ item.key }}"
+      remote_auth: "{{ item.value.remote_auth }}"
+      accprofile: "{{ item.value.accprofile }}"
+      wildcard: "{{ item.value.wildcard }}"
+      remote_group: "{{ item.value.remote_group | default(omit) }}"
+      password: "{{ item.value.password | default(omit) }}"
+      vdom: "{{ item.value.vdom }}"
+  loop: "{{ lookup('dict', admin, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

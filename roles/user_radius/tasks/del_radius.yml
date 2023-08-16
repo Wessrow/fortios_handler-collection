@@ -1,0 +1,11 @@
+---
+- name: Delete radius user
+  fortinet.fortios.fortios_user_radius:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    user_radius:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(radius.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

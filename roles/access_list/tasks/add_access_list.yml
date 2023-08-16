@@ -1,0 +1,12 @@
+---
+- name: Add access list
+  fortinet.fortios.fortios_router_access_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    router_access_list:
+      name: "{{ item.key }}"
+      rule: "{{ item.value.rule }}"
+  loop: "{{ lookup('dict', access_list, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

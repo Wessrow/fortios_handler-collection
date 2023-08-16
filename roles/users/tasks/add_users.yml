@@ -1,0 +1,19 @@
+---
+- name: Add local user
+  fortinet.fortios.fortios_user_local:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    user_local:
+      email_to: "{{ item.value.email_to }}"
+      ldap_server: "{{ item.value.ldap_server }}"
+      name: "{{ item.key }}"
+      passwd: "{{ item.value.passwd }}"
+      passwd_policy: "{{ item.value.passwd_policy }}"
+      radius_server: "{{ item.value.radius_server }}"
+      status: "{{ item.value.status }}"
+      two_factor: "{{ item.value.two_factor }}"
+      type: "{{ item.value.type }}"
+  loop: "{{ lookup('dict', local, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

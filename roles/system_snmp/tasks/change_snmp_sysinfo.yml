@@ -1,0 +1,6 @@
+---
+- name: Change snmp sysinfo settings
+  fortinet.fortios.fortios_system_snmp_sysinfo:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    system_snmp_sysinfo: "{{ sysinfo }}"

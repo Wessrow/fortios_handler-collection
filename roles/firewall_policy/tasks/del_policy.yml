@@ -1,0 +1,11 @@
+---
+- name: Delete ipv4 policies
+  fortinet.fortios.fortios_firewall_policy:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_policy:
+      policyid: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(policy.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

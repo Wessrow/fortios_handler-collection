@@ -1,0 +1,15 @@
+---
+- name: Add system snmp community
+  fortinet.fortios.fortios_system_snmp_community:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    system_snmp_community:
+      id: "{{ item.key }}"
+      name: "{{ item.value.name }}"
+      events: "{{ item.value.events }}"
+      hosts: "{{ item.value.hosts }}"
+  no_log: true
+  loop: "{{ lookup('dict', community, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

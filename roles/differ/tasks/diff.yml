@@ -1,0 +1,23 @@
+---
+- name: Diff configuration
+  fortios_fw_state:
+    host: "{{ inventory_hostname }}:{{ port }}"
+    token: "{{ token }}"
+    ssl_verify: "{{ ssl_verify }}"
+    differ_api_path: "{{ differ_api_path }}"
+    differ_api_name: "{{ differ_api_name | replace('_', '-') }}"
+  register: return_list
+
+- name: Debug
+  debug: 
+    msg: "{{ return_list.return_list }}"
+  tags: 
+  - debug
+  - never
+
+# - name: Debug diff
+#   debug: 
+#     msg: "{{ return_list.return_list | difference(vars[differ_api_name | replace('-', '_') | regex_replace('^([0-9])', '_\\1')].keys()) }}"
+#   tags: 
+#   - debug
+#   - never

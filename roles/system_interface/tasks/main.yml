@@ -1,0 +1,11 @@
+---
+- name: Differ for /system/interface/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "system"
+    differ_api_name: "interface"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_interface.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_interface.yml

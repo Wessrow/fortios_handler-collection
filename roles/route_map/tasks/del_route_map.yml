@@ -1,0 +1,11 @@
+---
+- name: Delete system interface
+  fortinet.fortios.fortios_router_route_map:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    router_route_map:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(route_map.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

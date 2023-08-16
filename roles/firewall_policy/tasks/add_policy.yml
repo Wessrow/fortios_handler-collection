@@ -1,0 +1,30 @@
+---
+- name: Add ipv4 policies
+  fortinet.fortios.fortios_firewall_policy:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    firewall_policy:
+      action: "{{ item.value.action }}"
+      policyid: "{{ item.key }}"
+      name: "{{ item.value.name }}"
+      dstaddr:
+        "{{ item.value.dstaddr }}"
+      dstintf:
+        "{{ item.value.dstintf }}"
+      srcaddr:
+        "{{ item.value.srcaddr }}"
+      srcintf:
+        "{{ item.value.srcintf }}"
+      service:
+        "{{ item.value.service }}"
+      schedule: "{{ item.value.schedule }}"
+      global_label: "{{ item.value.global_label }}"
+      av_profile: "{{ item.value.av_profile }}"
+      webfilter_profile: "{{ item.value.webfilter_profile }}"
+      utm_status: "{{ item.value.utm_status }}"
+      match_vip: "{{ item.value.match_vip | default(omit) }}"
+      logtraffic: "{{ item.value.logtraffic | default(omit) }}"
+  loop: "{{ lookup('dict', policy, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.value.name }} ID: {{ item.key }}"

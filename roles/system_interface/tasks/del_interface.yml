@@ -1,0 +1,11 @@
+---
+- name: Delete system interface
+  fortinet.fortios.fortios_system_interface:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    system_interface:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(interface.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

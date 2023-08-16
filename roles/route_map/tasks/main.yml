@@ -1,0 +1,11 @@
+---
+- name: Differ for /router/route-map/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "router"
+    differ_api_name: "route-map"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_route_map.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_route_map.yml

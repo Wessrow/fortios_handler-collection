@@ -1,0 +1,20 @@
+---
+- name: Add address object
+  fortinet.fortios.fortios_firewall_address:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    firewall_address:
+      name: "{{ item.key }}"
+      associated_interface: "{{ item.value.associated_interface | default(omit) }}"
+      interface: "{{ item.value.interface | default(omit) }}"
+      comment: "{{ item.value.comment }}"
+      type: "{{ item.value.type }}"
+      subnet: "{{ item.value.subnet | default(omit) }}"
+      start_ip: "{{ item.value.start_ip | default(omit) }}"
+      end_ip: "{{ item.value.end_ip | default(omit) }}"
+      fqdn: "{{ item.value.fqdn | default(omit) }}"
+      allow_routing: "{{ item.value.allow_routing | default(omit) }}"
+  loop: "{{ lookup('dict', address, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

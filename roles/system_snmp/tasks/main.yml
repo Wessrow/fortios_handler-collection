@@ -1,0 +1,13 @@
+---
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_snmp_sysinfo.yml
+- name: Differ for /system.snmp/community/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "system.snmp"
+    differ_api_name: "community"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_snmp_community.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_snmp_community.yml

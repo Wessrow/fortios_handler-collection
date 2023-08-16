@@ -1,0 +1,11 @@
+---
+- name: Delete dot1x policy
+  fortinet.fortios.fortios_switch_controller_security_policy_802_1x:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    switch_controller_security_policy_802_1x:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(_802_1X.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

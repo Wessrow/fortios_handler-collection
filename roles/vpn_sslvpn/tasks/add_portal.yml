@@ -1,0 +1,16 @@
+---
+- name: Add SSL-VPN Portal
+  fortinet.fortios.fortios_vpn_ssl_web_portal:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    vpn_ssl_web_portal:
+      forticlient_download: "{{ item.value.forticlient_download }}"
+      ip_pools: "{{ item.value.ip_pools }}"
+      name: "{{ item.key }}"
+      split_tunneling: "{{ item.value.split_tunneling }}"
+      tunnel_mode: "{{ item.value.tunnel_mode }}"
+      web_mode: "{{ item.value.web_mode }}"
+  loop: "{{ lookup('dict', portal, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

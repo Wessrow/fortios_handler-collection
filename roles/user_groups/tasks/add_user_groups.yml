@@ -1,0 +1,23 @@
+---
+- name: Add user groups
+  fortinet.fortios.fortios_user_group:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    user_group:
+      company: "{{ item.value.company | default(omit) }}"
+      expire: "{{ item.value.expire | default(omit) }}"
+      group_type: "{{ item.value.group_type }}"
+      guest: "{{ item.value.guest | default(omit) }}"
+      match: "{{ item.value.match | default(omit) }}"
+      member: "{{ item.value.member | default(omit) }}"
+      mobile_phone: "{{ item.value.mobile_phone | default(omit) }}"
+      name: "{{ item.key }}"
+      password: "{{ item.value.password | default(omit) }}"
+      sms_server: "{{ item.value.sms_server | default(omit) }}"
+      sponsor: "{{ item.value.sponsor | default(omit) }}"
+      user_id: "{{ item.value.user_id | default(omit) }}"
+      user_name: "{{ item.value.user_name | default(omit) }}"
+  loop: "{{ lookup('dict', usergrp, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

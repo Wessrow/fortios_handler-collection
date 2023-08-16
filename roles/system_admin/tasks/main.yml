@@ -1,0 +1,11 @@
+---
+- name: Differ for /system/admin/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "system"
+    differ_api_name: "admin"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_admin.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_admin.yml

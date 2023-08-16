@@ -1,0 +1,23 @@
+---
+- name: Add dot1x policy
+  fortinet.fortios.fortios_switch_controller_security_policy_802_1x:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    switch_controller_security_policy_802_1x:
+      name: "{{ item.key }}"
+      security_mode: "{{ item.value.security_mode }}"
+      user_group: "{{ item.value.user_group }}"
+      mac_auth_bypass: "{{ item.value.mac_auth_bypass }}"
+      open_auth: "{{ item.value.open_auth }}"
+      eap_passthru: "{{ item.value.eap_passthru }}"
+      eap_auto_untagged_vlans: "{{ item.value.eap_auto_untagged_vlans }}"
+      guest_vlan: "{{ item.value.guest_vlan }}"
+      guest_vlanid: "{{ item.value.guest_vlanid }}"
+      guest_auth_delay: "{{ item.value.guest_auth_delay }}"
+      auth_fail_vlan: "{{ item.value.auth_fail_vlan }}"
+      auth_fail_vlanid: "{{ item.value.auth_fail_vlanid }}"
+      policy_type: "{{ item.value.policy_type }}"
+  loop: "{{ lookup('dict', _802_1X, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

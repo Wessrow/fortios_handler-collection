@@ -1,0 +1,11 @@
+---
+- name: Delete access list
+  fortinet.fortios.fortios_router_access_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    router_access_list:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(access_list.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

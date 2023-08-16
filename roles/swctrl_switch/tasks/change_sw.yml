@@ -1,0 +1,10 @@
+---
+- name: Change switch-controller switch settings
+  fortinet.fortios.fortios_switch_controller_managed_switch:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    switch_controller_managed_switch: "{{ vars[item.path | basename | splitext | first] }}"
+  loop: "{{ switches.files }}"
+  loop_control:
+    label: "{{ item.path | basename | splitext | first }}"

@@ -1,0 +1,13 @@
+---
+- name: Sort ipv4 policies
+  fortinet.fortios.fortios_firewall_policy:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    action: move
+    self: "{{ item.key }}"
+    before: "{{ ansible_loop.previtem.key }}"
+  loop: "{{ lookup('dict', policy, wantlist=True) | reverse }}"
+  loop_control:
+    label: "{{ item.key }} before {{ ansible_loop.previtem.key | default('null') }}"
+    extended: true
+  when: not ansible_loop.first

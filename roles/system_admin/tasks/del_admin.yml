@@ -1,0 +1,11 @@
+---
+- name: Delete Admin
+  fortinet.fortios.fortios_system_admin:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    system_admin:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(admin.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

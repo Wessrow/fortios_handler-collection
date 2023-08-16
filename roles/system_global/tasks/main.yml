@@ -1,0 +1,3 @@
+---
+- name: Include Tasks
+  ansible.builtin.include_tasks: change_system_global.yml

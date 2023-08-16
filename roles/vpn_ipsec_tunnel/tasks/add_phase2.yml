@@ -1,0 +1,22 @@
+---
+- name: Add ipsec vpn - phase2
+  fortinet.fortios.fortios_vpn_ipsec_phase2_interface:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    vpn_ipsec_phase2_interface:
+      auto_negotiate: "{{ item.value.auto_negotiate }}"
+      comments: "{{ item.value.comments }}"
+      dhgrp: "{{ item.value.dhgrp }}"
+      dst_addr_type: "{{ item.value.dst_addr_type }}"
+      dst_name: "{{ item.value.dst_name }}"
+      dst_subnet: "{{ item.value.dst_subnet | default(omit) }}"
+      keylifeseconds: "{{ item.value.keylifeseconds }}"
+      name: "{{ item.key }}"
+      phase1name: "{{ item.value.phase1name }}"
+      proposal: "{{ item.value.proposal }}"
+      replay: "{{ item.value.replay }}"
+      src_subnet: "{{ item.value.src_subnet | default(omit) }}"
+  loop: "{{ lookup('dict', phase2_interface, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

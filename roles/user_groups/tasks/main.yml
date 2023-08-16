@@ -1,0 +1,11 @@
+---
+- name: Differ for /user/group/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "user"
+    differ_api_name: "group"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_user_groups.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_user_groups.yml

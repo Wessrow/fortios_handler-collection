@@ -1,0 +1,11 @@
+---
+- name: Delete system snmp community
+  fortinet.fortios.fortios_system_snmp_community:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    system_snmp_community:
+      id: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(community.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

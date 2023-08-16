@@ -1,0 +1,11 @@
+---
+- name: Differ for /user/local/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "user"
+    differ_api_name: "local"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_users.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_users.yml

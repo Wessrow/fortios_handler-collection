@@ -1,0 +1,11 @@
+---
+- name: Differ for /vpn.ssl.web/portal/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "vpn.ssl.web"
+    differ_api_name: "portal"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_portal.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_portal.yml

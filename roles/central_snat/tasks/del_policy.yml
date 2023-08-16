@@ -1,0 +1,11 @@
+---
+- name: Delete central snat policies
+  fortinet.fortios.fortios_firewall_central_snat_map:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_central_snat_map:
+      policyid: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(central_snat_map.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

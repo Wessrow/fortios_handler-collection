@@ -1,0 +1,11 @@
+---
+- name: Differ for /rotuer/prefix-list/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "router"
+    differ_api_name: "prefix-list"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_prefix_list.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_prefix_list.yml

@@ -1,0 +1,27 @@
+---
+- name: Add system interface
+  fortinet.fortios.fortios_system_interface:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    system_interface:
+      alias: "{{ item.value.alias }}"
+      allowaccess: "{{ item.value.allowaccess }}"
+      auto_auth_extension_device: "{{ item.value.auto_auth_extension_device | default(omit) }}"
+      description: "{{ item.value.description }}"
+      device_identification: "{{ item.value.device_identification }}"
+      interface: "{{ item.value.interface }}"
+      ip: "{{ item.value.ip | default(omit) }}"
+      lldp_transmission: "{{ item.value.lldp_transmission }}"
+      mode: "{{ item.value.mode }}"
+      name: "{{ item.key }}"
+      role: "{{ item.value.role }}"
+      security_mode: "{{ item.value.security_mode }}"
+      status: "{{ item.value.status }}"
+      vdom: "{{ vdom }}"
+      type: "{{ item.value.type }}"
+      vlanid: "{{ item.value.vlanid }}"
+      vrf: "{{ item.value.vrf | default(omit) }}"
+  loop: "{{ lookup('dict', interface, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

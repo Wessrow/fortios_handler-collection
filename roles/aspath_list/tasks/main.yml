@@ -1,0 +1,11 @@
+---
+- name: Differ for /rotuer/aspath-list/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "router"
+    differ_api_name: "aspath-list"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_aspath_list.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_aspath_list.yml

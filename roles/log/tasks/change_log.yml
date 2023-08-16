@@ -1,0 +1,6 @@
+---
+- name: Change syslogd
+  fortinet.fortios.fortios_log_syslogd_setting:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    log_syslogd_setting: "{{ log }}"

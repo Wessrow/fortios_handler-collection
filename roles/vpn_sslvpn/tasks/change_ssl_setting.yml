@@ -1,0 +1,6 @@
+---
+- name: Change VPN SSL settings
+  fortinet.fortios.fortios_vpn_ssl_settings:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    vpn_ssl_settings: "{{ vpn_ssl_setting }}"

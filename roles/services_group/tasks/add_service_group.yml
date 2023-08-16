@@ -1,0 +1,13 @@
+---
+- name: Add service group
+  fortinet.fortios.fortios_firewall_service_group:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    firewall_service_group:
+      comment: "{{ item.value.comment }}"
+      name: "{{ item.key }}"
+      member: "{{ item.value.member }}"
+  loop: "{{ lookup('dict', group, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

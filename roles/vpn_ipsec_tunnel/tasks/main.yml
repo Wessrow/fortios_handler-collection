@@ -1,0 +1,24 @@
+---
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_phase1.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_phase2.yml
+
+# I have disabled deletion of vpn, don't think it's necessary at this stage..
+
+# - name: Differ for /vpn.ipsec/phase2-interface/
+#   ansible.builtin.include_role:
+#     name: differ
+#   vars:
+#     differ_api_path: "vpn.ipsec"
+#     differ_api_name: "phase2-interface"
+# - name: Include Tasks
+#   ansible.builtin.include_tasks: del_phase2.yml
+# - name: Differ for /vpn.ipsec/phase1-interface/
+#   ansible.builtin.include_role:
+#     name: differ
+#   vars:
+#     differ_api_path: "vpn.ipsec"
+#     differ_api_name: "phase1-interface"
+# - name: Include Tasks
+#   ansible.builtin.include_tasks: del_phase1.yml

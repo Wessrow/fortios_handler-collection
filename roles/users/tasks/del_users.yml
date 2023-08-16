@@ -1,0 +1,11 @@
+---
+- name: Delete local user
+  fortinet.fortios.fortios_user_local:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    user_local:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(local.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

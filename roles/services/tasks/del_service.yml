@@ -1,0 +1,11 @@
+---
+- name: Delete service
+  fortinet.fortios.fortios_firewall_service_custom:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_service_custom:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(custom.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

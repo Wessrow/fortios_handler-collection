@@ -1,0 +1,15 @@
+---
+- name: Add tacacs user
+  fortinet.fortios.fortios_user_tacacsplus:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    user_tacacsplus:
+      name: "{{ item.key }}"
+      server: "{{ item.value.server }}"
+      key: "{{ item.value.key }}"
+      source_ip: "{{ item.value.source_ip }}"
+      interface: "{{ item.value.interface }}"
+  loop: "{{ lookup('dict', tacacs, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

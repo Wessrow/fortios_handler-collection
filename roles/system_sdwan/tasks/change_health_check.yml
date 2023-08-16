@@ -1,0 +1,7 @@
+---
+- name: Change sdwan health checks
+  fortinet.fortios.fortios_system_sdwan:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    system_sdwan:
+      health_check: "{{ health_checks }}"

@@ -1,0 +1,11 @@
+---
+- name: Delete address group
+  fortinet.fortios.fortios_firewall_addrgrp:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    firewall_addrgrp:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(addrgrp.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

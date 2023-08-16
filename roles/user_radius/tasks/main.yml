@@ -1,0 +1,11 @@
+---
+- name: Differ for /user/radius/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "user"
+    differ_api_name: "radius"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_radius.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_radius.yml

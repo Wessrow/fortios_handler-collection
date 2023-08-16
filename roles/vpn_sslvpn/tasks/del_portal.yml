@@ -1,0 +1,11 @@
+---
+- name: Delete SSL-VPN Portal
+  fortinet.fortios.fortios_vpn_ssl_web_portal:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: absent
+    vpn_ssl_web_portal:
+      name: "{{ item }}"
+  loop: "{{ return_list.return_list | difference(portal.keys()) }}"
+  loop_control:
+    label: "{{ item }}"

@@ -1,0 +1,10 @@
+---
+- name: Send generic json to path
+  fortinet.fortios.fortios_json_generic:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    json_generic:
+      method: "PUT"
+      path: "/api/v2/cmdb/firewall/address/{{ item.name }}"
+      jsonbody: "{{ item | to_json }}"
+  loop: "{{ address }}"

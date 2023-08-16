@@ -1,0 +1,13 @@
+---
+- name: Add address group
+  fortinet.fortios.fortios_firewall_addrgrp:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    firewall_addrgrp:
+      member: "{{ item.value.member }}"
+      name: "{{ item.key }}"
+      comment: "{{ item.value.comment }}"
+  loop: "{{ lookup('dict', addrgrp, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

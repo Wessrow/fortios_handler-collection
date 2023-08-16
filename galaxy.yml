@@ -1,0 +1,9 @@
+namespace: "wessrow"
+name: "fortios_handler"
+version: "0.0.5"
+readme: "README.md"
+authors:
+    - "Gustav Larsson"
+dependencies:
+    "fortinet.fortios": ">=2.2.3"
+# repository: "https://www.github.com/my_org/my_collection"

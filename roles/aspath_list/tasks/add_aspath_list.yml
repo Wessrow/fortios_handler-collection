@@ -1,0 +1,12 @@
+---
+- name: Add aspath list
+  fortinet.fortios.fortios_router_aspath_list:
+    access_token: "{{ token }}"
+    vdom: "{{ vdom }}"
+    state: present
+    router_aspath_list:
+      name: "{{ item.key }}"
+      rule: "{{ item.value.rule }}"
+  loop: "{{ lookup('dict', aspath_list, wantlist=True) }}"
+  loop_control:
+    label: "{{ item.key }}"

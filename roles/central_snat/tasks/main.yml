@@ -1,0 +1,11 @@
+---
+- name: Differ for /firewall/central-snat-map/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "firewall"
+    differ_api_name: "central-snat-map"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_policy.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_policy.yml

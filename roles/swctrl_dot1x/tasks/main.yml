@@ -1,0 +1,11 @@
+---
+- name: Differ for /switch-controller.security-policy/802-1X/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "switch-controller.security-policy"
+    differ_api_name: "802-1X"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_security_policy.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_security_policy.yml

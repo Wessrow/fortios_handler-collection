@@ -1,0 +1,11 @@
+---
+- name: Differ for /firewall.service/custom/
+  ansible.builtin.include_role:
+    name: differ
+  vars:
+    differ_api_path: "firewall.service"
+    differ_api_name: "custom"
+- name: Include Tasks
+  ansible.builtin.include_tasks: add_service.yml
+- name: Include Tasks
+  ansible.builtin.include_tasks: del_service.yml

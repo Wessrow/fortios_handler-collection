@@ -1,0 +1,4 @@
+---
+- name: Include Tasks
+  ansible.builtin.include_tasks: diff.yml
+
